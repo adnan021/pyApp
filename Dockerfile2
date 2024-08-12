@@ -1,0 +1,30 @@
+# Use an official Ubuntu as a parent image
+FROM ubuntu:20.04
+
+# Set environment variables to avoid interactive prompts during package installation
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Install Python and pip
+RUN apt-get update && \
+    apt-get install -y python3-pip python3-dev build-essential && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+# Set the working directory in the container
+WORKDIR /app
+
+# Copy the requirements file into the container
+COPY requirements.txt /pyApppp/
+
+# Install Python dependencies
+RUN pip3 install --no-cache-dir -r requirements.txt
+
+# Copy the application code into the container
+COPY . /pyApp/
+
+# Create a non-root user and switch to it
+RUN useradd -m nonrootuser
+USER nonrootuser
+
+# Define the command to run the application
+CMD ["python3", "app.py"]

@@ -1,0 +1,25 @@
+# Use an official Python runtime as a parent image
+FROM python:3.9-slim-buster
+
+# Set environment variables
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+
+# Set the working directory in the container
+WORKDIR /pyApp
+
+# Copy the requirements file into the container at /app
+COPY requirements.txt /pyApp/
+
+# Install dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the current directory contents into the container at /app
+COPY . /app/
+
+# Ensure the application runs as a non-root user
+RUN useradd -m nonrootuser
+USER nonrootuser
+
+# Run the application
+CMD ["python", "app.py"]

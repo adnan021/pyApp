@@ -1,0 +1,28 @@
+#if you are not able to create file or folder, it requied permission.
+#
+sudo chmod -R 777 folder_name_where_your_file_exists
+
+# create developemt folder and give permissions.
+$ /usr/local/source/repos/pyApp
+
+# 
+
+
+#Install python 
+sudo apt install python3-pip
+
+# Install textblob
+sudo apt install python3-pip
+
+# 
+creating docker file
+sudo docker image build -t appimage .
+
+Usage:
+Save the Dockerfile and requirements.txt in your project directory.
+Build the Docker image using the command:
+docker build -t mypyapp .
+
+Run the Docker container:
+docker run -it --rm mypyapp
+
